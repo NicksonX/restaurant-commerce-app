@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodylicous Foods - Catering Service</title>
+    <meta name="description" content="Order authentic Nigerian food online - rice, chicken, fufu, eba, and more!">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="food.css">
+</head>
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo" onclick="showSection('home')">
+                <div class="logo-icon"><i class="fas fa-utensils"></i></div>
+                Goodylicous<span>Foods</span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="scrollToMenu()">Menu</a>
+                <a href="#" onclick="scrollToFeatures()">Features</a>
+                <a href="#" onclick="scrollToTestimonials()">Reviews</a>
+                <a href="#" onclick="showSection('admin')">Admin</a>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <div class="user-menu" id="userMenu" onclick="openAuthModal('login')">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='25' fill='%23E85D04'/%3E%3Cellipse cx='50' cy='90' rx='35' ry='25' fill='%23E85D04'/%3E%3C/svg%3E" alt="User">
+                </div>
+                
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fas fa-shopping-bag"></i> Your Order</h2>
+            <button class="cart-close" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <h3>Your cart is empty</h3>
+                <p>Add some delicious Nigerian food!</p>
+            </div>
+        </div>
+        
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-summary">
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">₦0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Delivery</span>
+                    <span id="cartDelivery">₦500</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Tax (7.5%)</span>
+                    <span id="cartTax">₦0</span>
+                </div>
+                <div class="cart-summary-row total">
+                    <span>Total</span>
+                    <span id="cartTotal">₦0</span>
+                </div>
+            </div>
+            <button class="btn btn-primary checkout-btn" onclick="openCheckoutModal()">
+                <i class="fas fa-credit-card"></i> Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Home Section -->
+    <section id="homeSection" class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-inner">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Fresh & Hot Daily</span>
+                        </div>
+                        <h1>Authentic <span>Nigerian Cuisine</span> Delivered</h1>
+                        <p>Experience the rich flavors of Nigeria with our home-style cooking. From jollof rice to egusi soup, we bring tradition to your table.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary btn-lg" onclick="scrollToMenu()">
+                                <i class="fas fa-arrow-right"></i> Order Now
+                            </button>
+                            <button class="btn btn-secondary btn-lg" onclick="scrollToFeatures()">
+                                <i class="fas fa-info-circle"></i> Learn More
+                            </button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Happy Customers</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Menu Items</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Star Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 400'%3E%3Crect fill='%23FFF8F0' width='500' height='400' rx='24'/%3E%3Ccircle cx='250' cy='180' r='120' fill='%23E85D04' opacity='0.2'/%3E%3Ccircle cx='250' cy='180' r='90' fill='%23E85D04' opacity='0.3'/%3E%3Ctext x='250' y='140' text-anchor='middle' font-family='Poppins' font-size='60' fill='%23E85D04'%3E🍛%3C/text%3E%3Ctext x='250' y='200' text-anchor='middle' font-family='Playfair Display' font-size='24' fill='%231A1A2E'%3EJollof Rice%3C/text%3E%3Ctext x='250' y='230' text-anchor='middle' font-family='Poppins' font-size='16' fill='%238888A0'%3Ewith Grilled Chicken%3C/text%3E%3Crect x='180' y='260' width='140' height='8' rx='4' fill='%23E8E8F0'/%3E%3Crect x='200' y='280' width='100' height='8' rx='4' fill='%23E8E8F0'/%3E%3Ccircle cx='150' cy='120' r='40' fill='%232D6A4F' opacity='0.8'/%3E%3Ctext x='150' y='130' text-anchor='middle' font-size='30'%3E🥬%3C/text%3E%3Ccircle cx='380' cy='100' r='35' fill='%23F48C06' opacity='0.8'/%3E%3Ctext x='380' y='110' text-anchor='middle' font-size='25'%3E🌶️%3C/text%3E%3Ccircle cx='400' cy='280' r='30' fill='%23E85D04' opacity='0.6'/%3E%3Ctext x='400' y='290' text-anchor='middle' font-size='20'%3E🍅%3C/text%3E%3C/svg%3E" alt="Nigerian Jollof Rice" class="hero-img-main">
+                        
+                        <div class="floating-card floating-card-1">
+                            <div class="floating-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="floating-text">
+                                <h4>Fast Delivery</h4>
+                                <p>30-45 minutes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-card floating-card-2">
+                            <div class="floating-icon warning">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="floating-text">
+                                <h4>4.9 Rating</h4>
+                                <p>500+ reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Browse by Category</h2>
+                    <p>Find your favorite Nigerian dishes organized by type</p>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card active" data-category="all" onclick="filterMenu('all')">
+                        <div class="category-icon"><i class="fas fa-th-large"></i></div>
+                        <h3>All</h3>
+                        <span>50+ items</span>
+                    </div>
+                    <div class="category-card" data-category="rice" onclick="filterMenu('rice')">
+                        <div class="category-icon"><i class="fas fa-bowl-rice"></i></div>
+                        <h3>Rice Dishes</h3>
+                        <span>15 items</span>
+                    </div>
+                    <div class="category-card" data-category="swallow" onclick="filterMenu('swallow')">
+                        <div class="category-icon"><i class="fas fa-bread-slice"></i></div>
+                        <h3>Swallow</h3>
+                        <span>12 items</span>
+                    </div>
+                    <div class="category-card" data-category="protein" onclick="filterMenu('protein')">
+                        <div class="category-icon"><i class="fas fa-drumstick-bite"></i></div>
+                        <h3>Proteins</h3>
+                        <span>10 items</span>
+                    </div>
+                    <div class="category-card" data-category="sides" onclick="filterMenu('sides')">
+                        <div class="category-icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Sides</h3>
+                        <span>8 items</span>
+                    </div>
+                    <div class="category-card" data-category="drinks" onclick="filterMenu('drinks')">
+                        <div class="category-icon"><i class="fas fa-glass-water"></i></div>
+                        <h3>Drinks</h3>
+                        <span>8 items</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section class="menu-section" id="menuSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Menu</h2>
+                    <p>Discover the best of Nigerian cuisine, freshly prepared daily</p>
+                </div>
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Menu items will be dynamically generated -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="featuresSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Choose NaijaBites?</h2>
+                    <p>We're committed to delivering authentic Nigerian flavors with excellence</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                        <h3>Fast Delivery</h3>
+                        <p>Hot meals delivered within 30-45 minutes across Lagos. Track your order in real-time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Fresh Ingredients</h3>
+                        <p>We source our ingredients daily from local markets. No preservatives, just authentic taste.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chef-hat"></i></div>
+                        <h3>Expert Chefs</h3>
+                        <p>Our chefs are trained in traditional Nigerian cooking methods passed down through generations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Safe & Hygienic</h3>
+                        <p>ISO-certified kitchen with strict food safety protocols. Your health is our priority.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section" id="testimonialsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Our Customers Say</h2>
+                    <p>Join hundreds of satisfied customers enjoying our delicious meals</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">The jollof rice takes me back to my grandmother's kitchen in Lagos. Absolutely authentic and delicious! The delivery was fast and the food arrived still hot.</p>
+                        <div class="testimonial-author">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Ccircle cx='26' cy='26' r='26' fill='%23E8E8F0'/%3E%3Ccircle cx='26' cy='20' r='10' fill='%23F48C06'/%3E%3Cellipse cx='26' cy='48' rx='16' ry='12' fill='%23F48C06'/%3E%3C/svg%3E" alt="Adebayo T." class="author-avatar">
+                            <div class="author-info">
+                                <h4>Adebayo Thompson</h4>
+                                <p>Lagos Island</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">Finally found a place that gets the egusi soup right! The pounded yam is smooth and the soup has that authentic bitter leaf taste. Will definitely order again!</p>
+                        <div class="testimonial-author">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Ccircle cx='26' cy='26' r='26' fill='%23E8E8F0'/%3E%3Ccircle cx='26' cy='20' r='10' fill='%232D6A4F'/%3E%3Cellipse cx='26' cy='48' rx='16' ry='12' fill='%232D6A4F'/%3E%3C/svg%3E" alt="Chioma O." class="author-avatar">
+                            <div class="author-info">
+                                <h4>Chioma Okonkwo</h4>
+                                <p>Surulere</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">Ordered for a office party of 20 people. Everything was perfectly packaged, fresh, and on time. The grilled catfish and bole were a hit!</p>
+                        <div class="testimonial-author">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Ccircle cx='26' cy='26' r='26' fill='%23E8E8F0'/%3E%3Ccircle cx='26' cy='20' r='10' fill='%23E85D04'/%3E%3Cellipse cx='26' cy='48' rx='16' ry='12' fill='%23E85D04'/%3E%3C/svg%3E" alt="Michael A." class="author-avatar">
+                            <div class="author-info">
+                                <h4>Michael Adeyemi</h4>
+                                <p>Ikeja</p>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Admin Section -->
+    <section id="adminSection" class="admin-section">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <button class="btn btn-primary" onclick="openAddItemModal()">
+                    <i class="fas fa-plus"></i> Add New Item
+                </button>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="admin-stat-card">
+                    <div class="stat-icon orders"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="stat-info">
+                        <h3 id="totalOrders">24</h3>
+                        <p>Total Orders</p>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon revenue"><i class="fas fa-naira-sign"></i></div>
+                    <div class="stat-info">
+                        <h3 id="totalRevenue">₦156,000</h3>
+                        <p>Total Revenue</p>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon users"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>156</h3>
+                        <p>Registered Users</p>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon items"><i class="fas fa-utensils"></i></div>
+                    <div class="stat-info">
+                        <h3 id="menuItemCount">52</h3>
+                        <p>Menu Items</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-table-container">
+                <div class="admin-table-header">
+                    <h3>Recent Orders</h3>
+                    <select id="orderFilter" onchange="filterOrders(this.value)" style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-input);">
+                        <option value="all">All Orders</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Orders will be dynamically generated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon"><i class="fas fa-utensils"></i></div>
+                        Naija<span>Bites</span>
+                    </a>
+                    <p>Bringing authentic Nigerian cuisine to your doorstep. Order now and taste the difference!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showSection('home')">Home</a></li>
+                        <li><a href="#" onclick="scrollToMenu()">Menu</a></li>
+                        <li><a href="#" onclick="scrollToFeatures()">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Delivery Info</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Port Harcout, Nigeria</li>
+                        <li><i class="fas fa-phone"></i> +234 706 7381 760</li>
+                        <li><i class="fas fa-envelope"></i> goodnessojigwa@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 NaijaBites. All rights reserved. | Made with <i class="fas fa-heart" style="color: var(--primary);"></i> in Nigeria</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/2348001234567" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="authModalTitle">Login</h2>
+                <button class="modal-close" onclick="closeAuthModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="authForm" onsubmit="handleAuth(event)">
+                    <div class="form-group">
+                        <label for="authEmail">Email Address</label>
+                        <input type="email" id="authEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group" id="nameGroup" style="display: none;">
+                        <label for="authName">Full Name</label>
+                        <input type="text" id="authName" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="authPassword">Password</label>
+                        <input type="password" id="authPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group" id="confirmGroup" style="display: none;">
+                        <label for="authConfirm">Confirm Password</label>
+                        <input type="password" id="authConfirm" placeholder="••••••••">
+                    </div>
+                    <div class="form-group" id="phoneGroup" style="display: none;">
+                        <label for="authPhone">Phone Number</label>
+                        <input type="tel" id="authPhone" placeholder="+234 800 123 4567">
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit" id="authSubmitBtn">
+                        <i class="fas fa-sign-in-alt"></i> <span id="authSubmitText">Login</span>
+                    </button>
+                </form>
+                <div class="auth-switch" id="authSwitch">
+                    Don't have an account? <a href="#" onclick="switchAuthMode('signup')">Sign up</a>
+                </div>
+                <div class="auth-switch" id="authSwitchLogin" style="display: none;">
+                    Already have an account? <a href="#" onclick="switchAuthMode('login')">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <button class="modal-close" onclick="closeCheckoutModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                    <div class="form-group">
+                        <label for="checkoutName">Full Name</label>
+                        <input type="text" id="checkoutName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkoutEmail">Email</label>
+                            <input type="email" id="checkoutEmail" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutPhone">Phone</label>
+                            <input type="tel" id="checkoutPhone" placeholder="+234 800 123 4567" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutAddress">Delivery Address</label>
+                        <textarea id="checkoutAddress" rows="2" placeholder="Enter your full delivery address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutNote">Order Notes (Optional)</label>
+                        <textarea id="checkoutNote" rows="2" placeholder="Any special instructions..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-methods">
+                            <label class="payment-method selected" onclick="selectPayment(this, 'paystack')">
+                                <input type="radio" name="payment" value="paystack" checked>
+                                <div class="payment-radio"></div>
+                                <div class="payment-icon paystack"><i class="fas fa-credit-card"></i></div>
+                                <div class="payment-info">
+                                    <h4>Paystack</h4>
+                                    <p>Card, Bank Transfer, USSD</p>
+                                </div>
+                            </label>
+                            <label class="payment-method" onclick="selectPayment(this, 'bank')">
+                                <input type="radio" name="payment" value="bank">
+                                <div class="payment-radio"></div>
+                                <div class="payment-icon bank"><i class="fas fa-university"></i></div>
+                                <div class="payment-info">
+                                    <h4>Bank Transfer</h4>
+                                    <p>Direct bank deposit</p>
+                                </div>
+                            </label>
+                            <label class="payment-method" onclick="selectPayment(this, 'crypto')">
+                                <input type="radio" name="payment" value="crypto">
+                                <div class="payment-radio"></div>
+                                <div class="payment-icon bitcoin"><i class="fab fa-bitcoin"></i></div>
+                                <div class="payment-info">
+                                    <h4>Bitcoin / Ethereum</h4>
+                                    <p>Crypto payments</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary-row total" style="margin-top: 24px; padding-top: 16px; border-top: 2px solid var(--border-color);">
+                        <span>Total to Pay</span>
+                        <span id="checkoutTotal" style="color: var(--primary); font-size: 1.4rem;">₦0</span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success form-submit" id="checkoutSubmitBtn">
+                        <i class="fas fa-check"></i> Place Order
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-body">
+                <div class="order-success">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2>Order Placed Successfully!</h2>
+                    <p>Thank you for your order. We're preparing it now!</p>
+                    <div class="order-number" id="orderNumber">NB-XXXXXX</div>
+                    <p>A confirmation email has been sent to your email address.</p>
+                    <p style="margin-top: 16px; font-size: 0.9rem; color: var(--text-muted);">Track your order via WhatsApp updates</p>
+                    <button class="btn btn-whatsapp" style="margin-top: 24px;" onclick="closeSuccessModal(); toggleCart();">
+                        <i class="fab fa-whatsapp"></i> Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Item Modal (Admin) -->
+    <div class="modal-overlay" id="addItemModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add New Menu Item</h2>
+                <button class="modal-close" onclick="closeAddItemModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addItemForm" onsubmit="handleAddItem(event)">
+                    <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" placeholder="e.g., Jollof Rice with Chicken" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDesc">Description</label>
+                        <textarea id="itemDesc" rows="2" placeholder="Describe the dish..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemPrice">Price (₦)</label>
+                            <input type="number" id="itemPrice" placeholder="1500" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemCategory">Category</label>
+                            <select id="itemCategory" required>
+                                <option value="">Select category</option>
+                                <option value="rice">Rice Dishes</option>
+                                <option value="swallow">Swallow</option>
+                                <option value="protein">Proteins</option>
+                                <option value="sides">Sides</option>
+                                <option value="drinks">Drinks</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemImage">Image URL</label>
+                        <input type="url" id="itemImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="itemPopular" style="width: 18px; height: 18px;">
+                            <span>Mark as Popular</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit">
+                        <i class="fas fa-plus"></i> Add Item
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="food.js"></script>
+</body>
+</html>
